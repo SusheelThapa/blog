@@ -1,10 +1,35 @@
 from sqlalchemy.orm import Session
 from app.models.blog_post import BlogPost
+from app.models.author import Author
 from fastapi import HTTPException
 
 
-def get_blog_posts(db: Session):
-    return db.query(BlogPost).all()
+def create_blog_post(
+    db: Session,
+    headline: str,
+    introduction: str,
+    body: str,
+    conclusion: str,
+    author_id: int,
+):
+    # Check if the author exists
+    author = db.query(Author).filter(Author.id == author_id).first()
+    if not author:
+        raise HTTPException(status_code=404, detail="Author not found")
+
+    new_blog_post = BlogPost(
+        headline=headline,
+        introduction=introduction,
+        body=body,
+        conclusion=conclusion,
+        author=author,
+    )
+
+    db.add(new_blog_post)
+    db.commit()
+    db.refresh(new_blog_post)
+
+    return new_blog_post
 
 
 def get_blog_post(db: Session, blog_id: int):
@@ -14,22 +39,35 @@ def get_blog_post(db: Session, blog_id: int):
     return blog_post
 
 
-def create_blog_post(db: Session, title: str, content: str):
-    new_blog_post = BlogPost(title=title, content=content)
-    db.add(new_blog_post)
-    db.commit()
-    db.refresh(new_blog_post)
-    return new_blog_post
+def get_blog_posts(db: Session):
+    return db.query(BlogPost).all()
 
 
-def update_blog_post(db: Session, blog_id: int, title: str = None, content: str = None):
+def update_blog_post(
+    db: Session,
+    blog_id: int,
+    headline: str = None,
+    introduction: str = None,
+    body: str = None,
+    conclusion: str = None,
+):
     blog_post = get_blog_post(db, blog_id)
-    if title:
-        blog_post.title = title
-    if content:
-        blog_post.content = content
+
+    if headline:
+        blog_post.headline = headline
+
+    if introduction:
+        blog_post.introduction = introduction
+
+    if body:
+        blog_post.body = body
+
+    if conclusion:
+        blog_post.conclusion = conclusion
+
     db.commit()
     db.refresh(blog_post)
+
     return blog_post
 
 
