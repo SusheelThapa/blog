@@ -1,7 +1,12 @@
 import Blogs from "../components/Blogs/Blogs";
 import Layout from "../layout/Layout";
+import BlogType from "../types/blog";
 
-const HomePage = () => {
+interface Props {
+  blogs: BlogType[];
+}
+
+const HomePage = ({ blogs }: Props) => {
   return (
     <Layout>
       <div>
@@ -13,7 +18,7 @@ const HomePage = () => {
         </div>
       </div>
 
-      <Blogs />
+      <Blogs blogs={blogs} />
     </Layout>
   );
 };

@@ -14,17 +14,16 @@ const Blog = ({ blog }: Props) => {
   });
 
   return (
-    <div
-      key={blog.id}
-      className="text-lg my-10 bg-gray-300 p-8 rounded-2xl hover:bg-stone-300 flex gap-2 flex-col"
-    >
-      <div className="text-gray-600 flex justify-between">
-        <div>{blog.author_id}</div>
-        <div>{formattedDate}</div> {/* Display the formatted date */}
+    <a href={`/blog/${blog.id}`}>
+      <div className="text-lg my-10 bg-gray-300 p-8 rounded-2xl hover:bg-stone-300 flex gap-2 flex-col">
+        <div className="text-gray-600 flex justify-between">
+          <div>{blog.author_id}</div>
+          <div>{formattedDate}</div> {/* Display the formatted date */}
+        </div>
+        <div className="font-semibold text-2xl">{blog.headline}</div>
+        <div>{blog.introduction}</div>
       </div>
-      <div className="font-semibold text-2xl">{blog.headline}</div>
-      <div>{blog.introduction}</div>
-    </div>
+    </a>
   );
 };
 
