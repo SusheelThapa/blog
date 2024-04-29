@@ -1,3 +1,4 @@
+import Blogs from "../components/Blogs/Blogs";
 import Layout from "../layout/Layout";
 
 const HomePage = () => {
@@ -11,6 +12,8 @@ const HomePage = () => {
           Unlocking insights, one byte at a time
         </div>
       </div>
+
+      <Blogs />
     </Layout>
   );
 };

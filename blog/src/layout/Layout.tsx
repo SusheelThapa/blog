@@ -3,7 +3,7 @@ interface Props {
   className?: string;
 }
 const Layout = ({ className, children }: Props) => {
-  return <div className={`${className} mx-64 mt-10 `}>{children}</div>;
+  return <div className={`${className} mx-96 mt-10 `}>{children}</div>;
 };
 
 export default Layout;
