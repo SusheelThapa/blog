@@ -28,10 +28,7 @@ const AddBlog = () => {
     // Perform API call or other actions with the new blog data
     const addBlog = async () => {
       try {
-        await axios.post(
-          `http://localhost:8000/api/blogs?${queryNewBlog}`,
-          newBlog
-        );
+        await axios.post(`http://localhost:8000/api/blogs?${queryNewBlog}`);
       } catch (error) {
         console.log("Error occurred while adding blogs:", error);
       }

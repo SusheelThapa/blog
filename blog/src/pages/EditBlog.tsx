@@ -1,37 +1,24 @@
 import { useState, useEffect } from "react";
 import Layout from "../layout/Layout";
 import { useParams } from "react-router-dom";
+import querystring from "querystring";
+import axios from "axios";
 
 const EditBlog = () => {
   const { id } = useParams();
 
-  // State variables to hold form data
   const [headline, setHeadline] = useState("");
   const [introduction, setIntroduction] = useState("");
   const [body, setBody] = useState("");
   const [conclusion, setConclusion] = useState("");
 
-  const blogData = {
-    headline:
-      "Proin leo odio, porttitor id, consequat in, consequat ut, nulla.",
-    body: "Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum. Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est. Phasellus sit amet erat. Nulla tempus. Vivamus in felis eu sapien cursus vestibulum. Proin eu mi. Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem. Duis aliquam convallis nunc.",
-    date: "2024-04-29T02:01:54.742082",
-    id: 2,
-    introduction:
-      '"Duis at velit eu est congue elementum. In hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo. Aliquam quis turpis eget elit sodales scelerisque.',
-    conclusion:
-      '"Duis at velit eu est congue elementum. In hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo. Aliquam quis turpis eget elit sodales scelerisque.',
-    author_id: 3,
-  };
-
-  // Effect to fetch existing blog data when the component mounts
   useEffect(() => {
-    // Mock API call to fetch blog data based on the blogId
     const fetchBlogData = async () => {
       try {
-        // Replace this with actual API call
-
-        // Set form data with the fetched blog data
+        const response = await axios.get(
+          "http://localhost:8000/api/blogs/" + id
+        );
+        const blogData = response.data;
         setHeadline(blogData.headline);
         setIntroduction(blogData.introduction);
         setBody(blogData.body);
@@ -56,14 +43,27 @@ const EditBlog = () => {
       conclusion,
     };
 
-    // Perform API call or other actions to update the blog data
-    console.log("Updated Blog Data:", updatedBlog);
+    const updateBlog = async () => {
+      try {
+        await axios.put(
+          `http://localhost:8000/api/blogs/${id}?${querystring.stringify(
+            updatedBlog
+          )}`
+        );
+      } catch (error) {
+        console.log("Error while updating the blog post:", error);
+      }
+    };
+
+    updateBlog();
 
     // Reset form fields after submission
     setHeadline("");
     setIntroduction("");
     setBody("");
     setConclusion("");
+
+    window.location = "http://localhost:5173";
   };
 
   return (
