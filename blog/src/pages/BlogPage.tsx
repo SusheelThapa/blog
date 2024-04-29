@@ -2,22 +2,40 @@ import { useParams } from "react-router-dom";
 import BlogType from "../types/blog";
 import Layout from "../layout/Layout";
 import Button from "../components/Common/Button";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
-interface Props {
-  blogs: BlogType[];
-}
-
-const BlogPage = ({ blogs }: Props) => {
+const BlogPage = () => {
   // Get the id parameter from the URL
   const { id } = useParams<{ id: string }>();
 
-  console.log(id);
-
-  const blog = blogs.filter((b: BlogType) => {
-    return parseInt(id) == b.id;
+  const [blog, setBlog] = useState<BlogType>({
+    headline: "",
+    body: "",
+    date: "",
+    id: 0,
+    introduction: "",
+    conclusion: "",
+    author_id: 0,
   });
 
-  const { headline, body, date, introduction, conclusion, author_id } = blog[0];
+  useEffect(() => {
+    const fetchBlog = async (id: string) => {
+      try {
+        const response = await axios.get(
+          "http://localhost:8000/api/blogs/" + id
+        );
+        setBlog(response.data);
+      } catch (error) {
+        console.log("Error occurred while fetching blog article");
+      }
+    };
+    fetchBlog(id);
+  }, [id]);
+  console.log(id);
+
+  console.log(blog);
+  const { headline, body, date, introduction, conclusion, author_id } = blog;
 
   const blogDate = new Date(date);
 

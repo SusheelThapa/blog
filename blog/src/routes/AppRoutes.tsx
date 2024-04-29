@@ -2,14 +2,25 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import HomePage from "../pages/HomePage";
 import BlogPage from "../pages/BlogPage";
 import BlogType from "../types/blog";
-import blogsjson from "../assets/json/blog.json"; // Assuming the JSON file is exporting an array directly
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AddBlog from "../pages/AddBlog";
 import EditBlog from "../pages/EditBlog";
+import axios from "axios";
 
 const AppRoutes = () => {
-  const [blogs] = useState<BlogType[]>(blogsjson);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://localhost:8000/api/blogs/");
+        setBlogs(response.data);
+      } catch (error) {
+        console.error("Error fetching blogs:", error);
+      }
+    };
+    fetchData();
+  }, []);
 
+  const [blogs, setBlogs] = useState<BlogType[]>([]);
   return (
     <Router>
       <Routes>
