@@ -1,5 +1,8 @@
 import { useState } from "react";
 import Layout from "../layout/Layout";
+import getRandomNumber from "../utils/randomNumber";
+import axios from "axios";
+import querystring from "querystring";
 
 const AddBlog = () => {
   const [headline, setHeadline] = useState("");
@@ -9,20 +12,40 @@ const AddBlog = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const author_id = getRandomNumber(1, 6);
     const newBlog = {
       headline,
       introduction,
       body,
+      author_id,
       conclusion,
     };
 
+    const queryNewBlog = querystring.stringify(newBlog);
+
+    console.log(queryNewBlog);
+
     // Perform API call or other actions with the new blog data
+    const addBlog = async () => {
+      try {
+        await axios.post(
+          `http://localhost:8000/api/blogs?${queryNewBlog}`,
+          newBlog
+        );
+      } catch (error) {
+        console.log("Error occurred while adding blogs:", error);
+      }
+    };
+
+    addBlog();
 
     // Reset the form fields
     setHeadline("");
     setIntroduction("");
     setBody("");
     setConclusion("");
+
+    window.location = "http://localhost:5173";
   };
 
   return (
