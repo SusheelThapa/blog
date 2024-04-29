@@ -4,6 +4,7 @@ import BlogPage from "../pages/BlogPage";
 import BlogType from "../types/blog";
 import blogsjson from "../assets/json/blog.json"; // Assuming the JSON file is exporting an array directly
 import { useState } from "react";
+import AddBlog from "../pages/AddBlog";
 
 const AppRoutes = () => {
   const [blogs] = useState<BlogType[]>(blogsjson);
@@ -13,6 +14,7 @@ const AppRoutes = () => {
       <Routes>
         <Route path="/" element={<HomePage blogs={blogs} />} />
         <Route path="/blog/:id" element={<BlogPage blogs={blogs} />} />
+        <Route path="/addblog" element={<AddBlog />} />
       </Routes>
     </Router>
   );

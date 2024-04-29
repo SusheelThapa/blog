@@ -1,4 +1,5 @@
 import Blogs from "../components/Blogs/Blogs";
+import Button from "../components/Common/Button";
 import Layout from "../layout/Layout";
 import BlogType from "../types/blog";
 
@@ -17,7 +18,7 @@ const HomePage = ({ blogs }: Props) => {
           Unlocking insights, one byte at a time
         </div>
       </div>
-
+      <Button text="Add Blog" />
       <Blogs blogs={blogs} />
     </Layout>
   );
