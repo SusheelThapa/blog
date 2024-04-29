@@ -49,7 +49,7 @@ const BlogPage = ({ blogs }: Props) => {
               <Button
                 text="Edit Blog"
                 className="bg-yellow-500 hover:bg-yellow-400 text-white "
-                href="/editblog"
+                href={`/editblog/${id}`}
               />
               <Button
                 text="Delete Blog"
