@@ -1,5 +1,7 @@
+import AllRoutes from "./routes/AppRoutes";
+
 const App = () => {
-  return <div className="text-4xl font-montserrat">Blog Project</div>;
+  return <AllRoutes />;
 };
 
 export default App;

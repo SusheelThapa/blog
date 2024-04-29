@@ -19,3 +19,12 @@
 .font-montserrat {
     font-family: "Montserrat";
 }
+
+@font-face {
+    font-family: "Poppins";
+    src: url("./assets/fonts/Poppins-Regular.ttf")
+}
+
+body {
+    font-family: "Poppins";
+}
