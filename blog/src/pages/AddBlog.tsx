@@ -27,7 +27,7 @@ const AddBlog = () => {
 
   return (
     <Layout>
-      <div className="max-w-lg mx-auto mt-8">
+      <div className="max-w-2xl mx-auto mt-8">
         <h1 className="text-3xl font-semibold mb-4">Add Blog</h1>
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
@@ -86,7 +86,7 @@ const AddBlog = () => {
             type="submit"
             className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition-colors"
           >
-            Add Blog
+            Submit
           </button>
         </form>
       </div>

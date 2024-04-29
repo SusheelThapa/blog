@@ -11,14 +11,18 @@ const HomePage = ({ blogs }: Props) => {
   return (
     <Layout>
       <div>
-        <div className="text-9xl font-medium text-stone-950 font-montserrat">
+        <div className="text-7xl font-medium text-stone-950 font-montserrat">
           Blog
         </div>
-        <div className="text-2xl text-gray-700 mt-4">
+        <div className="text-lg text-gray-700 mt-4">
           Unlocking insights, one byte at a time
         </div>
       </div>
-      <Button text="Add Blog" />
+      <Button
+        text="Add Blog"
+        className="bg-blue-600 text-white  hover:bg-blue-700 font-bold tracking-wider "
+        href="/addblog"
+      />
       <Blogs blogs={blogs} />
     </Layout>
   );
