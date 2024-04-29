@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+    font-family: "RobotoSlab";
+    src: url("./assets/fonts/RobotoSlab-VariableFont_wght.ttf");
+}
+
+@font-face {
+    font-family: "Montserrat";
+    src: url("./assets/fonts/Montserrat-VariableFont_wght.ttf");
+}
+
+.font-robotoslab {
+    font-family: "RobotoSlab";
+}
+
+.font-montserrat {
+    font-family: "Montserrat";
+}
