@@ -72,8 +72,10 @@ const BlogPage = () => {
               <Button
                 text="Delete Blog"
                 className="bg-red-700 hover:bg-red-600 text-white "
-                onclick={() => {
-                  // API Call to delete blog
+                onclick={async () => {
+                  await axios.delete(
+                    "http://localhost:8000/api/blogs/" + blog.id
+                  );
                 }}
               />
             </div>
